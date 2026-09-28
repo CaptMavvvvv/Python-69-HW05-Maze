@@ -5,14 +5,6 @@ STEPS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
 def maze_solver_with_conveyors(maze: list[list[str]]) -> dict:
-    """
-    Rules (inferred from the examples):
-      - Stepping from a normal cell to an adjacent non-wall cell costs 1.
-      - Standing on a conveyor forces a move in its direction at cost 0.
-        Chained conveyors keep carrying you for free.
-      - A conveyor pointing into a wall or off the grid leaves you stuck.
-    Uses 0-1 BFS (deque): 0-cost edges go to the front, 1-cost to the back.
-    """
     if not maze or not maze[0]:
         return {"distance": -1, "path": []}
 
@@ -36,7 +28,7 @@ def maze_solver_with_conveyors(maze: list[list[str]]) -> dict:
     while dq:
         d, (r, c) = dq.popleft()
         if d > dist[r][c]:
-            continue  # stale entry
+            continue
         if (r, c) == end:
             break
 
